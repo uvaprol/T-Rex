@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6rmefyu814on"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2xuhp"]
+[ext_resource type="PackedScene" uid="uid://dsrih8a0j06pt" path="res://trex.tscn" id="1_wbl7s"]
+[ext_resource type="PackedScene" uid="uid://ceyxrnafx0hxh" path="res://cactus.tscn" id="2_qykyq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsmj5"]
+size = Vector2(1155, 53)
+
+[node name="main" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_2xuhp")
+
+[node name="map" type="CharacterBody2D" parent="."]
+
+[node name="fon" type="ColorRect" parent="map"]
+offset_right = 1154.0
+offset_bottom = 651.0
+
+[node name="plate" type="ColorRect" parent="map"]
+top_level = true
+offset_left = -1.0
+offset_top = 607.0
+offset_right = 1154.0
+offset_bottom = 659.0
+color = Color(0.415686, 0.415686, 0.415686, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="map"]
+visible = false
+position = Vector2(576.5, 633.5)
+shape = SubResource("RectangleShape2D_qsmj5")
+
+[node name="trex" parent="." instance=ExtResource("1_wbl7s")]
+position = Vector2(96, 577)
+scale = Vector2(0.470267, 0.470267)
+
+[node name="cactus" parent="." instance=ExtResource("2_qykyq")]
+position = Vector2(1159, 574)
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 1
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Score: 0"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 0.5
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 534.0
+offset_top = 316.0
+offset_right = 630.0
+offset_bottom = 354.0
+text = "Start Game"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

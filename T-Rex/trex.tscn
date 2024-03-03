@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsrih8a0j06pt"]
+
+[ext_resource type="Script" path="res://trex.gd" id="1_ovuvt"]
+[ext_resource type="Texture2D" uid="uid://d73o45wxxsch" path="res://texture/dino dead.png" id="2_uxr8a"]
+[ext_resource type="Texture2D" uid="uid://dbldhchd1qpec" path="res://texture/dino2.png" id="3_3bqeu"]
+[ext_resource type="Script" path="res://Dino_sprite.gd" id="3_x6fqf"]
+[ext_resource type="Texture2D" uid="uid://i21ov0u235fp" path="res://texture/dino3.png" id="4_gcnm4"]
+[ext_resource type="Script" path="res://DinoAnimated.gd" id="5_o87gu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it02x"]
+size = Vector2(4.22905, 3.75916)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r506j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3bqeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gcnm4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 7.0
+}]
+
+[node name="trex" type="CharacterBody2D"]
+process_mode = 1
+script = ExtResource("1_ovuvt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -168.0
+offset_top = -84.0
+offset_right = -103.0
+offset_bottom = -29.0
+scale = Vector2(5.08, 2.88)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+process_mode = 2
+visible = false
+texture = ExtResource("2_uxr8a")
+script = ExtResource("3_x6fqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-8, 35)
+scale = Vector2(4.25627, 4.25627)
+shape = SubResource("RectangleShape2D_it02x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(2, 27, 19, -22, 39, -23, 35, -42, -14.6747, -22.1301, -40, -12, -40, 8, -18, 29)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 3
+sprite_frames = SubResource("SpriteFrames_r506j")
+animation = &"run"
+frame = 1
+frame_progress = 0.514227
+script = ExtResource("5_o87gu")
